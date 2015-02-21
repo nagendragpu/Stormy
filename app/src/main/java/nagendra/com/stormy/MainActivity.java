@@ -1,13 +1,11 @@
 package nagendra.com.stormy;
 
-import android.app.DownloadManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -37,19 +35,52 @@ public class MainActivity extends ActionBarActivity {
         Request request= new Request.Builder().url(forecastUrl).build();
 
         Call call=client.newCall(request);
-        try {
-            Response response=call.execute();
 
-            if (response.isSuccessful())
-                Log.v(TAG, response.body().string());
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
 
-        } catch (IOException e) {
-            Log.e(TAG,"Exception Caught",e);
-        }
+            }
 
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+
+
+                try {
+                     //Syncronize method
+                    // Response response=call.execute();
+
+                    if (response.isSuccessful()){
+                        Log.v(TAG, response.body().string());
+
+
+                    }else{
+
+                        alertUserAboutError();
+                    }
+
+
+
+                } catch (IOException e) {
+                    Log.e(TAG,"Exception Caught",e);
+                }
+
+
+            }
+        });
+
+        Log.e(TAG,"Main Thread which is UI Running 0");
 
     }
 
+    private void alertUserAboutError() {
+
+        AlertDialogFragments dialog=new AlertDialogFragments();
+        dialog.show(getFragmentManager(),"Err0r");
+
+
+    }
 
 
 }
