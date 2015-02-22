@@ -160,6 +160,8 @@ public class MainActivity extends ActionBarActivity {
         Drawable drawable=getResources().getDrawable(mCurrentWeather.getIconId());
         miconImageView.setImageDrawable(drawable);
 
+        //new thing
+
 
     }
 
