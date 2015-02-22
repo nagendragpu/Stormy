@@ -90,8 +90,9 @@ public class CurrentWeather {
         mTime = time;
     }
 
-    public double getTemperature() {
-        return mTemperature;
+    public int getTemperature() {
+        int cel= (int) (((mTemperature-32)*5)/9);
+        return (int)Math.round(cel);
     }
 
     public void setTemperature(double temperature) {
@@ -106,8 +107,10 @@ public class CurrentWeather {
         mHumidity = humidity;
     }
 
-    public double getPercipchance() {
-        return mPercipchance;
+    public int getPercipchance() {
+        int percipChancePer= (int) (mPercipchance * 100);
+        return (int)Math.round(percipChancePer);
+
     }
 
     public void setPercipchance(double percipchance) {
