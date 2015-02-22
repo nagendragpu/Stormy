@@ -30,9 +30,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         String apiKey="f26959a54749690b5a8d366e3534dea0";
         double latitude=37.8267;
         double longitude=-122.423;
@@ -42,32 +39,23 @@ public class MainActivity extends ActionBarActivity {
         if(isNetworkAvailable()) {
 
             OkHttpClient client = new OkHttpClient();
-
             Request request = new Request.Builder().url(forecastUrl).build();
-
             Call call = client.newCall(request);
-
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Request request, IOException e) {
-
                 }
 
                 @Override
                 public void onResponse(Response response) throws IOException {
-
                     try {
                         //Syncronize method
                         // Response response=call.execute();
                         String jsonData=response.body().string();
                         Log.v(TAG,jsonData );
                         if (response.isSuccessful()) {
-
                         mCurrentWeather=getCurrentDetails(jsonData);
-
-
                         } else {
-
                            alertUserAboutError();
                         }
 
