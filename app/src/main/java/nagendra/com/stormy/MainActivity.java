@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Call;
@@ -19,16 +21,31 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 public class MainActivity extends ActionBarActivity {
 
     public static final String TAG=MainActivity.class.getSimpleName();
     private CurrentWeather mCurrentWeather;
 
+    @InjectView(R.id.temperatureLabel) TextView mtemperatureLabel;
+    @InjectView(R.id.timeLabel) TextView mtimeLabel;
+    @InjectView(R.id.humidityLabel) TextView mhumidityLabel;
+    @InjectView(R.id.precipLabel) TextView mprecipLabel;
+    @InjectView(R.id.summaryLabel) TextView msummaryLabel;
+    @InjectView(R.id.iconImageView) ImageView miconImageView;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.inject(this);
 
         String apiKey="f26959a54749690b5a8d366e3534dea0";
         double latitude=37.8267;
